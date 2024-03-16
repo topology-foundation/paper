@@ -1,2 +1,1 @@
-# paper
-The Topology paper
+# The Topology paper
