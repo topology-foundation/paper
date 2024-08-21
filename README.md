@@ -1,3 +1,5 @@
 # The Topology paper
-
-Latest draft: [v7.5](https://github.com/topology-foundation/paper/blob/main/drafts/topology-draft-v7.5.pdf)
+This repo tracks the revisions of Topology Protocol whitepaper.
+- [`topology-protocol-whitepaper.pdf`](topology-protocol-whitepaper.pdf) is exported from the latest revision of the whitepaper
+- `src/` contains the source files for building the whitepaper
+- `archive/` contains drafts in the past
