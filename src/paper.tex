@@ -27,14 +27,14 @@
 \rhead{ \textit{ }} 
 
 % Update your Headers here
-\fancyhead[LO]{Topology Protocol: A Distributed System Protocol for the Open Metaverse}
+\fancyhead[LO]{Distributed Real-time Programs: an Open Internet Protocol for the Open Metaverse}
 % \fancyhead[RE]{Firstauthor and Secondauthor} % Firstauthor et al. if more than 2 - must use \documentclass[twoside]{article}
 
 
 
   
 %% Title
-\title{Topology Protocol: A Distributed System Protocol for the Open Metaverse}
+\title{Distributed Real-time Programs: an Open Internet Protocol for the Open Metaverse}
 
 \author{
  Thomas (Hsea-Ching) Hsueh \\
@@ -50,7 +50,7 @@
 
 \begin{abstract}
 
-We present Topology Protocol, a distributed system protocol designed for the Open Metaverse. The Open Metaverse is a programmable medium that enables real-time multi-user, interoperable, and censorship-resistant applications on open decentralized networks. To unlock a new phase of human productivity and collaboration, this new medium requires a distributed system protocol that is credibly neutral and scalable. It must support billions of equal participants interacting in real time at negligible costs while preserving user autonomy and privacy — fundamental needs in human interactions. To meet such requirements, we introduce a new abstraction called Conflict-free Replicated Objects (CRO) and the concept of decentralized Random Access Memory (dRAM). CROs are composable programmable objects that can be subscribed to as PubSub groups on open P2P networks. They can be mutated in real time concurrently while avoiding the costs of coordination, leveraging the properties of Conflict-free Replicated Data Types (CRDTs). Hash graphs provide CROs with causal ordering and immunity to Sybil attacks. The Topology Protocol specifies methods for CRO interaction and their corresponding behavior on P2P networks. Utility, scalability and security aspects such as snapshot, compaction, verifiability, access control and equivocation tolerance are addressed. Nodes that implement the Topology Protocol form an open ephemeral P2P network, maintaining CRO states at the edge for immediate access, and in sync across all subscriber nodes. Summarizing its capabilities, we refer to this P2P network as a dRAM, a new kind of decentralized network powering distributed programs that are lock-free concurrent. CROs on dRAM will be able to interoperate with blockchains and open standards at other layers of the computing stack, advancing the landscape of world-scale distributed computing and becoming a key building block at the foundation of the Open Metaverse.
+We present Distributed Real-time Programs (DRP), an open Internet protocol to unlock the Open Metaverse. The Open Metaverse is a programmable medium that enables real-time multi-user, interoperable, and censorship-resistant applications on open decentralized networks. To unlock a new phase of human productivity and collaboration, this new medium requires an open Internet protocol that is credibly neutral and scalable. It must support billions of equal participants interacting in real time at negligible costs while preserving user autonomy and privacy — fundamental needs in human interactions. DRP is purposefully designed to meet these goals. Programs built with DRP are concurrently writeable in real time, completely avoiding consensus overhead by leveraging the properties of Conflict-free Replicated Data Types (CRDTs). They are identified as PubSub groups on the open P2P network comprised of DRP nodes. They use hash graphs as causal logs, granting them immunity to Sybil attacks with no involvement of financial incentives. DRP specifies a set of methods for clients to indicate the actions they would like to perform on a given DRP program. Utility, scalability, and security aspects, such as snapshot, compaction, verifiability, access control, and equivocation tolerance, are addressed. We refer to the DRP network as \textit{decentralized RAM}, a new kind of decentralized network powering distributed programs that are lock-free concurrent. Programs on the DRP network can interoperate with blockchains and open standards at other layers of the computing stack, advancing the landscape of world-scale distributed computing and becoming a key building block at the foundation of the Open Metaverse.
 \end{abstract}
 
 
@@ -66,7 +66,7 @@ Blockchains laid the foundation for trust-minimized ownership and censorship-res
 
 Various approaches to the blockchain scalability problem exist, yet none of them address the fundamental issue of coordination costs. One approach is to shard the network by applications \cite{Cosmos, RGB}. Another approach is to batch total-ordered blocks of transactions at rollups and submit their commitments and proofs on blockchains \cite{Rollup}. However, the transaction throughput of each shard or rollup remains heavily communication-bound.
 
-In this paper, we sketch out a solution that leverages the concurrency, composability, and local-first \cite{LoFi} properties of Conflict-free Replicated Data Types (CRDTs) \cite{CRDT}. We propose Topology Protocol, a protocol dedicated to enabling applications that are real-time multiplayer, sovereign, and running on open P2P networks. We introduce Conflict-free Replicated Objects (CRO), a new abstraction for building multiplayer programs at ease and making them accessible on the P2P network. We explore how CROs can be applied to social graphs for social media applications, and multiplayer physics simulations with elastic collision constraints. We discuss various aspects that impact the flexibility, scalability and security of CROs, including how they can produce verifiable compacted snapshots for interacting with blockchains. Nodes that implement Topology Protocol form an ephemeral P2P network that keeps CRO states next to local compute on the edge, effectively forming a decentralized Random Access Memory (dRAM). Interoperating with open standards and protocols at other layers of the stack, Topology Protocol aims to grow into the de facto distributed system protocol of the Open Metaverse.
+In this paper, we sketch out a solution that leverages the concurrency, composability, and local-first \cite{LoFi} properties of Conflict-free Replicated Data Types (CRDTs) \cite{CRDT}. We propose Distributed Real-time Programs (DRP), a protocol dedicated to enabling applications that are real-time multiplayer, sovereign, and running on open P2P networks. We introduce DRP Objects, a new abstraction for building censorship-resistant multiplayer applications at ease. We explore how DRP Objects can be applied to social graphs for social media applications, and multiplayer physics simulations with elastic collision constraints. We discuss various aspects that impact the flexibility, scalability and security of DRP Objects, including how they can produce verifiable compacted snapshots for interacting with blockchains. Nodes that implement DRP form an open ephemeral P2P network that keeps DRP Object states next to local compute on the edge, effectively forming a decentralized random access memory. Interoperating with open standards and protocols at other layers of the stack, DRP aims to grow into the de facto Internet protocol of the Open Metaverse.
 
 \section{Conflict-free Replicated Data Types}
 \label{sec:headings}
@@ -75,12 +75,12 @@ Conflict-free Replicated Data Types (CRDTs) encapsulate coordination-free replic
 
 CRDTs are expressive. One approach is to make complex CRDTs from scratch. Although notoriously tricky to get right, correct CRDTs exist for indexed sequence types \cite{Lseq, RGA, YATA, Fugue}, XML \cite{XML-CRDT}, and JSON \cite{JSON-CRDT}. Another approach is to make complex CRDTs through class composition. A class whose fields are all typed by CRDTs, and whose methods access its fields only through the public methods of their types, is itself a CRDT.
 
-\section{Conflict-free Replicated Objects}
+\section{DRP Objects}
 \label{sec:headings}
 
-The primary abstraction of Topology Protocol is \textit{Conflict-free Replicated Object} (CRO). CROs are composable programmable objects that can be updated in real time concurrently and subscribed to as publish/subscribe (PubSub) groups on open P2P networks.
+The primary abstraction of DRP is \textit{DRP Object}. DRP Objects are composable programmable objects that can be updated in real time concurrently and subscribed to as publish/subscribe (PubSub) groups on open P2P networks.
 
-Each CRO is an instance of a \textit{blueprint}. A blueprint has two main components:
+Each DRP Object is an instance of a \textit{blueprint}. A blueprint has two main components:
 \begin{enumerate}
     \item States: Each state is typed with either a built-in CRDT recognized by the protocol, or by another blueprint through class composition.
     \item Functions: A function may read and \textit{monotonically mutate} (\textit{i.e.,} inflate) the states. All function signatures are specified in the blueprint's Application Binary Interface (ABI).
@@ -90,7 +90,7 @@ Additionally, a \textit{merge} function must be defined for merging the states o
 \section{Causal ordering}
 \label{sec:headings}
 
-To further enhance the expressivity of CROs, we introduce causal ordering among their operations. This ordering allows for more complex relationships between operations. Causal order is a partial order that can be enforced in a distributed system without coordination. This differs from the total order in systems that offer strict serializability, which requires coordination. Given an operation history of a CRO, its state is derived from applying the operations in a linear order obtained from topological sort that preserves the causal order.
+To further enhance the expressivity of DRP Objects, we introduce causal ordering among their operations. This ordering allows for more complex relationships between operations. Causal order is a partial order that can be enforced in a distributed system without coordination. This differs from the total order in systems that offer strict serializability, which requires coordination. Given an operation history of a DRP Object, its state is derived from applying the operations in a linear order obtained from topological sort that preserves the causal order.
 
 Approaches such as vector clocks and version vectors exist for capturing causality in distributed systems. However, these approaches are vulnerable to equivocation, making them unsafe in the presence of Byzantine actors. We need a way to provide causal ordering while tolerating Byzantine faults.
 
@@ -105,14 +105,14 @@ Notationally:
     \item Let $\textbf{F}$ be the hash graph's \textit{frontier}, or the set of vertices whose operations are currently not the dependencies of any other operation. Let $\textbf{F}^*$ be the \textit{hashed frontier}, or $\{h(v) | v \in \textbf{F}\}$.
     \item Let $\textbf{O}$ be the hash graph's \textit{origin}, or the set of vertices whose operations do not causally depend on any other operation.
     \item For an operation, let $\textbf{D}$ be the set of hashed vertices that are its causal dependencies. For a newly generated operation $u$, its $\textbf{D}$ equals $\textbf{F}^*$ at the time of generation.
-    \item Attached to the origin of a hash graph is the \textit{original state} of the CRO, or its state before applying any of the operations in the hash graph.
+    \item Attached to the origin of a hash graph is the \textit{original state} of the DRP Object, or its state before applying any of the operations in the hash graph.
 \end{enumerate}
 We can then define a vertex of a hash graph as containing the tuple $(u, \textbf{D})$. The collision resistance of $h(\cdot)$ ensures that the hash graph contains no cycles. Figure 1 shows an example of a hash graph.
 
 \begin{figure}[htp]
     \centering
     \includegraphics[width=10cm]{fig1}
-    \caption{A hash graph of a CRO for illustration purposes. Given this hash graph, vertex $V_7$ should contain $(u_7, \{h(V_3),h(V_5)\})$. The vertices in the frontier $\textbf{F} = \{V_6, V_7, V_8\}$ are circled. The origin $\textbf{O}$ contains only one vertex, $\bot$, which carries a null operation. For the next vertex to be added to the graph, $V_9$, its causal dependencies should be $\textbf{F}^* = \{h(V_6), h(V_7), h(V_8)\}$. The original state of this CRO is $S_0$.}
+    \caption{A hash graph of a DRP Object for illustration purposes. Given this hash graph, vertex $V_7$ should contain $(u_7, \{h(V_3),h(V_5)\})$. The vertices in the frontier $\textbf{F} = \{V_6, V_7, V_8\}$ are circled. The origin $\textbf{O}$ contains only one vertex, $\bot$, which carries a null operation. For the next vertex to be added to the graph, $V_9$, its causal dependencies should be $\textbf{F}^* = \{h(V_6), h(V_7), h(V_8)\}$. The original state of this DRP Object is $S_0$.}
     \label{fig:1}
 \end{figure}
 
@@ -123,23 +123,23 @@ We can then define a vertex of a hash graph as containing the tuple $(u, \textbf
     \label{fig:2}
 \end{figure}
 
-Using this approach, when two nodes synchronize their operation histories of the same CRO, they effectively merge their hash graphs. Having matching $\textbf{F}^*$ implies having equivalent hash graphs. Operations whose reported causal dependencies are unrecognized by honest nodes will not be added to their hash graphs.
+Using this approach, when two nodes synchronize their operation histories of the same DRP Object, they effectively merge their hash graphs. Having matching $\textbf{F}^*$ implies having equivalent hash graphs. Operations whose reported causal dependencies are unrecognized by honest nodes will not be added to their hash graphs.
 
 As another example, consider a distributed system comprising node A and B, separated by a network delay of 40 ms. Both nodes start from the same initial state, denoted by $\bot$. Each node generates 60 operations per second ($\approx$16.6 ms between consecutive operations), a standard frame rate for games, and reconciles its hash graph with the other node as fast as the network conditions permit. Figure 2 shows the hash graphs at node A immediately before and after A generates vertex $A_5$.
 
-This approach is immune to Sybil attacks. As long as honest nodes form a connected subgraph in the P2P network, the system is able to function correctly. This allows CROs to tolerate arbitrarily many Sybil actors, hence the immunity. In contrast, systems with global Byzantine consensus functions correctly only if less than one third of the nodes are faulty. No expensive countermeasures such as Proof of Work or Proof of Stake are involved, making the costs of transacting with CROs practically zero.
+This approach is immune to Sybil attacks. As long as honest nodes form a connected subgraph in the P2P network, the system is able to function correctly. This allows DRP Objects to tolerate arbitrarily many Sybil actors, hence the immunity. In contrast, systems with global Byzantine consensus functions correctly only if at most one third of the nodes are faulty. No expensive countermeasures such as Proof of Work or Proof of Stake are involved, making the costs of interacting with DRP Objects practically zero.
 
 \subsection{Concurrency semantics}
-Equipped with causal ordering, we now have a notion of concurrency. Two operations can be comparable (\textit{i.e.} one happened after the other) or incomparable (\textit{i.e.} they are concurrent to each other). For operations that happened concurrently but do not commute, the order at which they are serialized and executed impacts the CRO state. The \textit{concurrency semantics} of a CRO define its behavior in the presence of concurrent operations that are not commutative.
+Equipped with causal ordering, we now have a notion of concurrency. Two operations can be comparable (\textit{i.e.} one happened after the other) or incomparable (\textit{i.e.} they are concurrent to each other). For operations that happened concurrently but do not commute, the order at which they are serialized and executed impacts the state of the DRP Object. The \textit{concurrency semantics} of a DRP Object define its behavior in the presence of concurrent operations that do not commute.
 
 \begin{figure}[htp]
     \centering
     \includegraphics[width=7cm]{fig3}
-    \caption{A hash graph for the register CRO that accepts addition and multiplication.}
+    \caption{A hash graph for DRP Object that holds a single integer and accepts addition and multiplication.}
     \label{fig:3}
 \end{figure}
 
-Consider a register CRO that holds a single integer and accepts two types of operations:
+Consider a DRP Object that holds a single integer and accepts two types of operations:
 \begin{enumerate}
     \item $Add(x)$: adds $x$ to the current value
     \item $Mul(x)$: multiplies the current value by $x$
@@ -151,26 +151,26 @@ However, integer addition and multiplication do not commute. Figure 3 shows a ha
     \item $(1*3)+7+2 = 12$
 \end{enumerate}
 
-To resolve this ambiguity, we can introduce the following concurrency semantics to the CRO: addition goes first in case of concurrency. With this rule, every honest replica of this hash graph would arrive at $26$ as its final state.
+To resolve this ambiguity, we can introduce the following concurrency semantics to the DRP: addition goes first in case of concurrency. With this rule, every honest replica of this hash graph would arrive at $26$ as its final state.
 
 \section{Signaling}
 \label{sec:headings}
 
-Having established how individual CROs function, we now turn to how these objects interact with each other. CROs interact by \textit{signaling}, a CRO-level term to differentiate from messaging at the network layer. A signal originates from an operation at the sender CRO. It then materializes into an operation at the receiver CRO. For causality to work, a signal needs to specify its causal dependencies in both the sender CRO and receiver CRO's hash graphs. This means the node that intends to send a cross-object signal needs to have the hash graphs of both the sender and receiver CROs locally. This requirement creates challenges in scalability, as nodes must maintain and synchronize multiple hash graphs simultaneously. The safety and scalability of cross-object signaling remain an active area of research.
+Having established how individual DRP Objects function, we now turn to how these objects interact with each other. DRP Objects interact by \textit{signaling}, a DRP Object-level term to differentiate from messaging at the network layer. A signal originates from an operation at the sender DRP Object. It then materializes into an operation at the receiver DRP Object. For causality to work, a signal needs to specify its causal dependencies in both the sender DRP Object and receiver DRP Object's hash graphs. This means the node that intends to send a signal needs to have the hash graphs of both the sender and receiver DRP Objects locally. This requirement creates challenges in scalability, as nodes must maintain and synchronize multiple hash graphs simultaneously. The transaction guarantees, security, and scalability of signaling remain an active area of research.
 
-Figure 4 illustrates a cross-object signal diagrammatically, where the signal “glues” together its originating operation on the sender CRO side and the operation it materializes into on the receiver CRO side.
+Figure 4 illustrates a signal diagrammatically, where the signal “glues” together its originating operation on the sender DRP Object side and the operation it materializes into on the receiver DRP Object side.
 
 \begin{figure}[htp]
     \centering
     \includegraphics[width=15cm]{fig4}
-    \caption{Hash graphs of CRO $X$, $Y$, $Z$ interacting by passing signals (original states are omitted). Cross-object signals are denoted as dotted arrows. Cross-object causal dependencies are denoted as dashed pointers. The vertices where signals are originated are enclosed in circles, whereas those on the receiving sides are enclosed in squares. In this example, the generation of vertex $X_4$ also produces a signal to object $Y$, materializing into vertex $Y_6$. Signaling also occurred between vertices $Y_7$ and $Z_2$. The causal dependencies of $Y_6$ is $X_2$, $X_3$, and $Y_3$. The causal dependencies of $Z_2$ is $Y_4$, $Y_5$, $Y_6$, and $Z_1$.}
+    \caption{Hash graphs of DRP Object $X$, $Y$, $Z$ interacting by passing signals (original states are omitted). Signals are denoted as dotted arrows. Cross-object causal dependencies are denoted as dashed pointers. The vertices where signals are originated are enclosed in circles, whereas those on the receiving sides are enclosed in squares. In this example, the generation of vertex $X_4$ produces a signal to object $Y$, materializing into vertex $Y_6$. Signaling also occurred between vertices $Y_7$ and $Z_2$. The causal dependencies of $Y_6$ is $X_2$, $X_3$, and $Y_3$. The causal dependencies of $Z_2$ is $Y_4$, $Y_5$, $Y_6$, and $Z_1$.}
     \label{fig:4}
 \end{figure}
 
 \section{Invariants}
 \label{sec:headings}
 
-Besides composability, preservation of invariants of all kinds is crucial for CROs to be richly expressive. An invariant in a distributed system is a predicate over the system state or state transitions that is always true, observed at any of its replicas. Consider two types of invariants:
+Besides composability, preservation of invariants of all kinds is crucial for DRP Objects to be richly expressive. An invariant in a distributed system is a predicate over the system state or state transitions that is always true, observed at any of its replicas. Consider two types of invariants:
 \begin{enumerate}
     \item \textit{Numeric invariants}. For example, a numeric invariant required for cryptocurrency applications is that an account balance is nonnegative at all times. This invariant could break down when we allow concurrent updates to the same account — a shared wallet with \$1 left, spent concurrently by Alice and Bob.
     \item \textit{Integrity invariants}. For example, referential integrity requires that if there is a pointer from object A to B, B must be valid. This invariant is compromised when a new reference to B is added while B is invalidated concurrently.
@@ -185,11 +185,11 @@ Common approaches to preserving such invariants include:
 \section{Examples}
 \label{sec:headings}
 
-In this section, we provide two examples that illustrate the expressivity of CRO.
+In this section, we provide two examples that illustrate the expressivity of DRP Object.
 
 \subsection{Example 1}
 
-The first example is a social graph that demonstrates the composability of CROs. Algorithm 1 shows the pseudocode of a blueprint named GMapGSet, which is a grow-only map (GMap) where values are grow-only sets (GSets). When adding a key-value pair to it, the pair is inserted into the map if the key is absent, otherwise the value is added to the GSet corresponding to the key in the map.
+The first example is a social graph that demonstrates the composability of DRP Objects. Algorithm 1 shows the pseudocode of a blueprint named GMapGSet, which is a grow-only map (GMap) where values are grow-only sets (GSets). When adding a key-value pair to it, the pair is inserted into the map if the key is absent, otherwise the value is added to the GSet corresponding to the key in the map.
 
 \begin{algorithm}
 \caption{GMapGSet}
@@ -210,7 +210,7 @@ The first example is a social graph that demonstrates the composability of CROs.
 \end{algorithmic}
 \end{algorithm}
 
-We can build a basic social graph on top of this CRO. Algorithm 2 shows the pseudocode of a blueprint named SocialGraph, which uses a GSet to store user public keys, a two-phase set (2PSet) to store posts, and instantiates the GMapGSet blueprint to store the timestamps when users are added. Note that the timestamps in the signals $AddUser$ and $AddPost$ are reported by nodes voluntarily, which can be faulty. In the next example, we drop these timestamps and leverage hash graphs for causal ordering.
+We can build a basic social graph on top of this DRP Object. Algorithm 2 shows the pseudocode of a blueprint named SocialGraph, which uses a GSet to store user public keys, a two-phase set (2PSet) to store posts, and instantiates the GMapGSet blueprint to store the timestamps when users are added. Note that the timestamps in the signals $AddUser$ and $AddPost$ are reported by nodes voluntarily, which can be faulty. In the next example, we drop these timestamps and leverage hash graphs for causal ordering.
 
 \begin{algorithm}
 \caption{SocialGraph}
@@ -326,52 +326,52 @@ Algorithm 3 shows the pseudocode of a blueprint named Multiplayer2DPhysics, illu
 \section{Interaction methods}
 \label{sec:headings}
 
-Topology Protocol defines a set of methods, or simply \textit{verbs}, for nodes to interact with a given CRO. At the core of the protocol is the PubSub model for nodes in P2P networks to subscribe to CROs and publish updates on them asynchronously. CROs are identified as PubSub groups or topics. Nodes only subscribe to CROs they are interested in. This keeps CROs loosely coupled and helps reduce memory and bandwidth requirement for operating nodes. In contrast, every network participant of a blockchain is by default "subscribed" to all smart contracts. Figure 5 illustrates this interaction pattern.
+DRP defines a set of methods, or simply \textit{verbs}, for nodes to interact with a given DRP Object. At the core of the protocol is the PubSub model for nodes in P2P networks to subscribe to DRP Objects and publish updates on them asynchronously. DRP Objects are identified as PubSub groups or topics. Nodes only subscribe to DRP Objects they are interested in. This keeps DRP Objects loosely coupled and helps reduce memory and bandwidth requirement for operating nodes. In contrast, every network participant of a blockchain is by default "subscribed" to all smart contracts. Figure 5 illustrates this interaction pattern.
 
 \begin{figure}[htp]
     \centering
     \includegraphics[width=13cm]{fig5}
-    \caption{Alice, Bob, and Charlie are subscribed to CRO $D$. Alice, Bob, Dave, and Eve are subscribed to CRO $B$. All nodes are connected peer-to-peer.}
+    \caption{Alice, Bob, and Charlie are subscribed to DRP Object $D$. Alice, Bob, Dave, and Eve are subscribed to DRP Object $B$. All nodes are connected peer-to-peer.}
     \label{fig:5}
 \end{figure}
 
 The set of core interaction methods and their semantics is as follows:
 \begin{enumerate}
-    \item \textbf{CREATE}: to create a new CRO. Under the hood, a PubSub group (topic) is created for the new CRO.
-    \item \textbf{UPDATE}: to perform an update operation on a given CRO. The update is published to the corresponding PubSub group.
-    \item \textbf{SUBSCRIBE}: to subscribe to all updates performed on a given CRO. The node adds the corresponding PubSub group to its groups of interest.
-    \item \textbf{UNSUBSCRIBE}: to unsubscribe and stop receiving updates on a given CRO. The node removes the corresponding PubSub group from its groups of interest.
-    \item \textbf{SYNC}: to reconcile the differences in operation histories (hash graphs) of a given CRO between the local one and a remote one. The SYNC method has two main purposes: for a new node to bootstrap into an existing CRO, and as an out-of-band synchronization method besides P2P gossiping.
+    \item \textbf{CREATE}: to create a new DRP Object. Under the hood, a PubSub group (topic) is created for the new DRP Object.
+    \item \textbf{UPDATE}: to perform an update operation on a given DRP Object. The update is published to the corresponding PubSub group.
+    \item \textbf{SUBSCRIBE}: to subscribe to all updates performed on a given DRP Object. The node adds the corresponding PubSub group to its groups of interest.
+    \item \textbf{UNSUBSCRIBE}: to unsubscribe and stop receiving updates on a given DRP Object. The node removes the corresponding PubSub group from its groups of interest.
+    \item \textbf{SYNC}: to reconcile the differences in operation histories (hash graphs) of a given DRP Object between the local one and a remote one. The SYNC method has two main purposes: for a new node to bootstrap into an existing DRP Object, and as an out-of-band synchronization method besides P2P gossiping.
 \end{enumerate}
 
-SYNC can take a long time to complete when a node is bootstrapping into a CRO with a large history. This can be viewed as a problem of set reconciliation. One common approach is to exchange bloom filters to reduce the message complexity of the sync process. A more promising approach has constant overhead even when reconciling sets with very large differences \cite{PRIBLT}.
+SYNC can take a long time to complete when a node is bootstrapping into a DRP Object with a large history. This can be viewed as a problem of set reconciliation. One common approach is to exchange bloom filters to reduce the message complexity of the sync process. A more promising approach has constant overhead even when reconciling sets with very large differences \cite{PRIBLT}.
 
 \section{Operation life cycle}
 \label{sec:headings}
 
-The life cycle of a CRO operation differs significantly from a blockchain transaction. When a node performs a write (update) by generating an operation on a CRO, the operation is added to the node's local copy of the CRO's hash graph immediately. A node reads a CRO state by serializing the node's local copy of the CRO's hash graph. If a node performs a write and a subsequent read immediately, the read is guaranteed to observe the write. In other words, CRO provides highly available operations and guarantees low latency \cite{HAT}. In contrast, blockchains are not highly available. A blockchain transaction becomes available only after it is included in a block that is proposed, verified and acknowledged by a threshold amount of network participants.
+The life cycle of a DRP Object operation differs significantly from a blockchain transaction. When a node performs a write (update) by generating an operation on a DRP Object, the operation is added to the node's local copy of the DRP Object's hash graph immediately. A node reads a DRP Object state by serializing the node's local copy of the DRP Object's hash graph. If a node performs a write and a subsequent read immediately, the read is guaranteed to observe the write. In other words, DRP Object provides highly available operations and guarantees low latency \cite{HAT}. In contrast, blockchains are not highly available. A blockchain transaction becomes available only after it is included in a block that is proposed, verified and acknowledged by a threshold amount of network participants.
 
 \section{Snapshot}
 \label{sec:headings}
 
-A CRO snapshot is a single hash graph that represents an agreement among the CRO's replicas. It serves multiple purposes:
+A DRP Object snapshot is a single hash graph that represents an agreement among the DRP Object's replicas. It serves multiple purposes:
 \begin{enumerate}
     \item It acts as a "state save" that may be worth persisted (\textit{e.g.}, on IPFS \cite{IPFS}).
     \item It can be used to generate irreversible transactions on blockchains.
 \end{enumerate}
 
-The computation of snapshots faces several problems. We must avoid involving "all nodes" in the algorithm: unanimity can be very problematic due to network conditions, dynamic membership, and Byzantine behavior. The algorithm needs to run concurrently to the underlying CRO activities without hindering or suspending them. The algorithm must complete with reasonable bandwidth consumption, thus the nodes involved must not send entire replicas over the wire.
+The computation of snapshots faces several problems. We must avoid involving "all nodes" in the algorithm: unanimity can be very problematic due to network conditions, dynamic membership, and Byzantine behavior. The algorithm needs to run concurrently to the underlying DRP Object activities without hindering or suspending them. The algorithm must complete with reasonable bandwidth consumption, thus the nodes involved must not send entire replicas over the wire.
 
-Our current solution builds on threshold logical clock (TLC) \cite{TLC} as a decentralized pacemaker, on top of which Byzantine consensus can be reached. Each CRO has its own TLC operated by its subscriber nodes. When a node is ready to advance the TLC tick, it proposes the hashed frontier $\textbf{F}^*$ of its own hash graph by broadcasting it to other subscribers. Instead of unanimity, the tick advances by threshold amounts of subscriber nodes signing and acknowledging messages. Three consecutive ticks can be used to form a consensus round, yielding a snapshot. The process runs continuously, allowing snapshots to be taken periodically.
+Our current solution builds on threshold logical clock (TLC) \cite{TLC} as a decentralized pacemaker, on top of which Byzantine consensus can be reached. Each DRP Object has its own TLC operated by its subscriber nodes. When a node is ready to advance the TLC tick, it proposes the hashed frontier $\textbf{F}^*$ of its own hash graph by broadcasting it to other subscribers. Instead of unanimity, the tick advances by threshold amounts of subscriber nodes signing and acknowledging messages. Three consecutive ticks can be used to form a consensus round, yielding a snapshot. The process runs continuously, allowing snapshots to be taken periodically.
 
-CRO snapshots remain an active area of research. The algorithms and their configurability supported by the protocol remain to be determined through the protocol development process.
+DRP Object snapshots remain an active area of research. The algorithms and their configurability supported by the protocol remain to be determined through the protocol development process.
 
 \section{Compaction}
 \label{sec:headings}
 
 Grow-only hash graphs are problematic. Unbounded memory is needed, and large graphs take longer to bootstrap. Compaction serializes the state of a CRDT by applying the operations carried by a portion of the hash graph before pruning that portion away. Compaction discards causal information and thus is perfectly safe only when performed over vertices that will never be the causal dependencies of any future operations.
 
-However, perfectly safe compaction can be impractical. To be certain that a vertex $V$ is perfectly safe to drop, a node needs to receive a vertex from every other node that causally depends on $V$ \cite{PO-CRDT}. This involves the notion of "all nodes", our usual suspect. Our current solution is to use the TLC consensus rounds to drive compaction. Each round yields a hash graph, whose frontier $\textbf{F}$ comprises vertices that are considered causally stable. All preceding vertices can be compacted. The CRO's state is forwarded by applying the operations of those compacted vertices in a linear order obtained from topological sort. Figure 6 illustrates this process.
+However, perfectly safe compaction can be impractical. To be certain that a vertex $V$ is perfectly safe to drop, a node needs to receive a vertex from every other node that causally depends on $V$ \cite{PO-CRDT}. This involves the notion of "all nodes", our usual suspect. Our current solution is to use the TLC consensus rounds to drive compaction. Each round yields a hash graph, whose frontier $\textbf{F}$ comprises vertices that are considered causally stable. All preceding vertices can be compacted. The DRP Object's state is forwarded by applying the operations of those compacted vertices in a linear order obtained from topological sort. Figure 6 illustrates this process.
 
 \begin{figure}[htp]
     \centering
@@ -390,14 +390,14 @@ By leveraging recursive zero-knowledge proofs \cite{Recursive-SNARK}, it is poss
 \section{Access control}
 \label{sec:headings}
 
-Access control is important for multiplayer applications. Social and communal spaces are much more useful when fine-grained permissions can be assigned to participants. Common access control models include level-based (lattice-based) \cite{LBAC} and role-based ones \cite{RBAC}. It gets tricky when a CRO's access control logic is specified within itself or another CRO, due to eventual consistency. What happens when an operation that revokes the access role of a participant is concurrent to an operation generated by the same participant that depends on having the very role assigned?
+Access control is important for multiplayer applications. Social and communal spaces are much more useful when fine-grained permissions can be assigned to participants. Common access control models include level-based (lattice-based) \cite{LBAC} and role-based ones \cite{RBAC}. It gets tricky when a DRP Object's access control logic is specified within itself or another DRP Object, due to eventual consistency. What happens when an operation that revokes the access role of a participant is concurrent to an operation generated by the same participant that depends on having the very role assigned?
 
-The core issue here is conflict resolution strategies that involve permission changes. A promising solution is proposed in \cite{Matrix}, where both permission roles or levels and the causal order among operations are taken into account to topologically sort a hash graph. The solution works under the assumption that participants with higher permission roles or levels are not attackers. Another promising direction is to leverage the TLC to establish a linear order between permission-changing operations and permission-dependent operations. A CRO may require that permission-changing operations remain ineffective until the next TLC tick.
+The core issue here is conflict resolution strategies that involve permission changes. A promising solution is proposed in \cite{Matrix}, where both permission roles or levels and the causal order among operations are taken into account to topologically sort a hash graph. The solution works under the assumption that participants with higher permission roles or levels are not attackers. Another promising direction is to leverage the TLC to establish a linear order between permission-changing operations and permission-dependent operations. A DRP Object may require that permission-changing operations remain ineffective until the next TLC tick.
 
 \section{Security}
 \label{sec:headings}
 
-Security is a critical aspect of CROs. We consider three threat models for CROs and explore potential solutions.
+Security is a critical aspect of DRP Objects. We consider three threat models for DRP Objects and explore potential solutions.
 
 \subsection {Hash graph pollution}
 Hash graphs can be polluted by vertices with garbage payload such as invalid operations. When receiving a new vertex, a node can validate its operation before adding it to the local hash graph. The nodes that published bad operations can be banned. If an operation can be validated atomically, we can be certain that all honest nodes will reach the same conclusion. It is trickier when the validity of the operation depends on the operations that happened before it. In this case, we can define operation validity as a function of the operation itself and all operations that can be transitively reached through the causal dependencies in the hash graph \cite{BFT-CRDT}.
@@ -406,17 +406,17 @@ Hash graphs can be polluted by vertices with garbage payload such as invalid ope
 Equivocation occurs when a node, assumed to be a single-threaded process, generates concurrent operations. An honest node can detect that another node has generated concurrent operations. The honest node may choose to remove the corresponding bad vertices from its hash graph, ban the Byzantine node, and expect all other honest nodes to do the same. However, downstream vertices that causally depend on these bad vertices may have been generated. It is not obvious how to graft these downstream vertices back to the hash graph. Equivocation tolerance remains an active area of research.
 
 \subsection {Backdated dependencies}
-We consider this as the trickiest threat model: when nodes report dependencies that are older than the vertices in the frontier. The question is how backdated dependencies can be reliably detected by all honest nodes. A vertex carrying correct dependencies but arriving late due to network delays is indistinguishable from a vertex with backdated dependencies. One promising direction is to leverage the TLC as it introduces a notion of linear time. Denote the frontier of the hash graph from $n$ consensus rounds ago as $\textbf{F}_{-n}$. A CRO can stipulate that a vertex should not report causal dependencies that causally precede any of the vertices in $\textbf{F}_{-n}$ with $n$ carefully chosen, otherwise the vertex will be handled according to some policy that is applied consistently across all honest nodes. As such, the TLC serves as a security clock for the CRO, whose $\textbf{F}_{-n}$ serves as the backstop for backdated dependencies.
+We consider this as the trickiest threat model: when nodes report dependencies that are older than the vertices in the frontier. The question is how backdated dependencies can be reliably detected by all honest nodes. A vertex carrying correct dependencies but arriving late due to network delays is indistinguishable from a vertex with backdated dependencies. One promising direction is to leverage the TLC as it introduces a notion of linear time. Denote the frontier of the hash graph from $n$ consensus rounds ago as $\textbf{F}_{-n}$. A DRP Object can stipulate that a vertex should not report causal dependencies that causally precede any of the vertices in $\textbf{F}_{-n}$ with $n$ carefully chosen, otherwise the vertex will be handled according to some policy that is applied consistently across all honest nodes. As such, the TLC serves as a security clock for the DRP Object, whose $\textbf{F}_{-n}$ serves as the backstop for backdated dependencies.
 
-\section{Decentralized random access memory}
+\section{Decentralized RAM}
 \label{sec:headings}
 
-A compelling perspective on Topology Protocol is its ability to power a decentralized network that functions as a "decentralized Random Access Memory" (dRAM). The following properties of the protocol support this perspective:
+A compelling perspective on DRP is its ability to power a decentralized network that functions as a \textit{decentralized RAM}. The following properties of the protocol support this perspective:
 
 \begin{enumerate}
-    \item \textbf{Random access}. Users can synchronize on any CROs of interest without having to synchronize every single CRO in the system, contrary to smart contracts on blockchains. This access pattern reduces the resource requirement of running a protocol node, making it more accessible for users to participate in the network.
-    \item \textbf{Closeness to compute}. We envision that most users of CRO-powered applications will operate nodes on their devices, holding CRO replicas locally. In other words, the protocol champions the principles of local-first software \cite{LoFi}. This approach reduces latency, enhances privacy, and improves both scalability and resilience by "load-balancing" across user devices. In contrast, most blockchain users access smart contracts via centralized RPC nodes, not unlike the access pattern of most cloud apps. This property is analogous to the role random access memory serves in a memory hierarchy.
-    \item \textbf{Ephemerality}. Persistence of CROs is out of scope of the protocol. The protocol expects the nodes to be ephemeral. Their states are volatile from the system's perspective, corresponding to the volatility of RAM. The data movement between Topology nodes and persistence providers is analogous to the data movement between RAM and disk storage which is non-volatile.
+    \item \textbf{Random access}. Users can synchronize on any DRP Objects of interest without having to synchronize every single DRP Object in the system, contrary to smart contracts on blockchains. This access pattern reduces the resource requirement of running a protocol node, making it more accessible for users to participate in the network.
+    \item \textbf{Closeness to compute}. We envision that most users of DRP Object-powered applications will operate nodes on their devices, holding DRP Object replicas locally. In other words, the protocol champions the principles of local-first software \cite{LoFi}. This approach reduces latency, enhances privacy, and improves both scalability and resilience by "load-balancing" across user devices. In contrast, most blockchain users access smart contracts via centralized RPC nodes, not unlike the access pattern of most cloud apps. This property is analogous to the role random access memory serves in a memory hierarchy.
+    \item \textbf{Ephemerality}. Persistence of DRP Objects is out of scope of the protocol. The protocol expects the nodes to be ephemeral. Their states are volatile from the system's perspective, corresponding to the volatility of RAM. The data movement between DRP nodes and persistence providers is analogous to the data movement between RAM and disk storage which is non-volatile.
 \end{enumerate}
 \noindent
 
@@ -424,7 +424,7 @@ Decentralized RAM has the potential to enable a new class of decentralized appli
 
 \section{Conclusion}
 
-In this paper, we introduced CRO and Topology Protocol for P2P real-time multiplayer applications. CRDT is a natural choice for such use cases, and the use of hash graphs allows capturing causality among operations while tolerating Byzantine faults. CRO provides the programmability of common object systems and encapsulates coordination-free replication strategies. Topology Protocol specifies a set of interaction methods for CROs to be created, updated, subscribed to, unsubscribed from, and synchronized. Their semantics correspond to behavior on the underlying P2P networks under the publish/subscribe model. Snapshot, compaction, access control, and threat models of CROs were addressed. Nodes that implement Topology Protocol keep replicas of CROs locally, facilitate persistence without being primarily responsible for it, and disseminate CRO updates only to nodes that are interested in them. As such, a P2P network comprised of such nodes effectively works as a decentralized RAM.
+In this paper, we introduced DRP for P2P real-time multiplayer applications. CRDT is a natural choice for such use cases, and the use of hash graphs allows capturing causality among operations while tolerating Byzantine faults. DRP Object provides the programmability of common object systems and encapsulates coordination-free replication strategies. DRP specifies a set of interaction methods for DRP Objects to be created, updated, subscribed to, unsubscribed from, and synchronized. Their semantics correspond to behavior on the underlying P2P networks under the publish/subscribe model. Snapshot, compaction, access control, and threat models of DRP Objects were addressed. Nodes that implement DRP keep replicas of DRP Objects locally, facilitate persistence without being primarily responsible for it, and disseminate DRP Object updates only to nodes that are interested in them. As such, a P2P network comprised of such nodes effectively functions as a decentralized RAM.
 
 \section*{Acknowledgments}
 
@@ -440,8 +440,8 @@ The development of this work has been greatly enriched by the insights and suppo
 \item Jay Oak, for the pivotal input in shaping the scope and capabilities of the protocol and the abundant feedback for improving this paper;
 \item Akash S M, for suggesting that we explain why concurrency semantics are important;
 \item Matthew Weidner, for pointing out the challenges in exercising access control under eventual consistency, and a solution designed for the Matrix Protocol;
-\item Peter van Hardenberg, for pointing out the importance of invariant preservation and suggesting that we add a representative example for discussing how constraints may be enforced in CROs;
-\item Pierre Semanne and Goblin Oats, for advocating against a global finality system shared by all CROs, an idea explored in the early drafts;
+\item Peter van Hardenberg, for pointing out the importance of invariant preservation and suggesting that we add a representative example for discussing how constraints may be enforced in DRP Objects;
+\item Pierre Semanne and Goblin Oats, for advocating against a global finality system shared by all DRP Objects, an idea explored in the early drafts;
 \item haadcode, for reinforcing our concept of a decentralized RAM;
 \item Oskar Thorén and Anderson Chen, for carefully reviewing the early drafts and offering ideas for improvement;
 \item Alok Vasudev and Adam Goldberg, for the patience and encouragement for us to focus on finding the truth.
