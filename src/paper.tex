@@ -24,17 +24,17 @@
 %Header
 \pagestyle{fancy}
 \thispagestyle{empty}
-\rhead{ \textit{ }} 
+\rhead{ \textit{ }}
 
 % Update your Headers here
-\fancyhead[LO]{Distributed Real-time Programs: an Open Internet Protocol for the Open Metaverse}
+\fancyhead[LO]{Distributed Real-time Programs: an Open Internet Protocol for the World Computer}
 % \fancyhead[RE]{Firstauthor and Secondauthor} % Firstauthor et al. if more than 2 - must use \documentclass[twoside]{article}
 
 
 
-  
+
 %% Title
-\title{Distributed Real-time Programs: an Open Internet Protocol for the Open Metaverse}
+\title{Distributed Real-time Programs: an Open Internet Protocol for the World Computer}
 
 \author{
  Thomas (Hsea-Ching) Hsueh \\
@@ -49,8 +49,7 @@
 
 
 \begin{abstract}
-
-We present Distributed Real-time Programs (DRP), an open Internet protocol to unlock the Open Metaverse. The Open Metaverse is a programmable medium that enables real-time multi-user, interoperable, and censorship-resistant applications on open decentralized networks. To unlock a new phase of human productivity and collaboration, this new medium requires an open Internet protocol that is credibly neutral and scalable. It must support billions of equal participants interacting in real time at negligible costs while preserving user autonomy and privacy — fundamental needs in human interactions. DRP is purposefully designed to meet these goals. Programs built with DRP are concurrently writeable in real time, completely avoiding consensus overhead by leveraging the properties of Conflict-free Replicated Data Types (CRDTs). They are identified as PubSub groups on the open P2P network comprised of DRP nodes. They use hash graphs as causal logs, granting them immunity to Sybil attacks with no involvement of financial incentives. DRP specifies a set of methods for clients to indicate the actions they would like to perform on a given DRP program. Utility, scalability, and security aspects, such as snapshot, compaction, verifiability, access control, and equivocation tolerance, are addressed. We refer to the DRP network as \textit{decentralized RAM}, a new kind of decentralized network powering distributed programs that are lock-free concurrent. Programs on the DRP network can interoperate with blockchains and open standards at other layers of the computing stack, advancing the landscape of world-scale distributed computing and becoming a key building block at the foundation of the Open Metaverse.
+We present Distributed Real-time Programs (DRP), an open peer-to-peer Internet protocol to introduce RAM to the World Computer. To unlock a new phase of human productivity and collaboration, the World Computer requires an open Internet protocol that is credibly neutral and scalable. It must support billions of equal participants interacting in real time at negligible costs while preserving user autonomy and privacy — fundamental needs in human interactions. Programs built with DRP are concurrently writeable in real time, completely avoiding consensus overhead by leveraging the properties of Conflict-free Replicated Data Types (CRDTs). They are identified as PubSub groups on the open P2P network comprised of DRP nodes. They use hash graphs as causal logs, granting them immunity to Sybil attacks with no involvement of financial incentives. DRP specifies a set of methods for clients to indicate the actions they would like to perform on a given DRP program. Utility, scalability, and security aspects, such as snapshot, compaction, verifiability, access control, and equivocation tolerance, are addressed. We refer to the DRP network as decentralized RAM, a new kind of decentralized network powering distributed programs that are lock-free concurrent. Programs on the DRP network can interoperate with blockchains and open standards at other layers of the computing stack, advancing the landscape of world-scale distributed computing and becoming a key building block at the foundation of the world computer.
 \end{abstract}
 
 
@@ -60,13 +59,13 @@ We present Distributed Real-time Programs (DRP), an open Internet protocol to un
 \section{Introduction}
 Multi-user applications on the Internet largely rely on centralized intermediaries to mediate user interactions. While this architecture has seen tremendous success, it suffers a number of problems. Intermediaries dictate who can access what applications when and how, limiting user agency and autonomy. Interoperability among applications is rarely possible because most intermediaries operate on the business model of building and protecting their own network effects.
 
-The Open Metaverse must operate on open decentralized networks \cite{SIGGRAPH}. The network architecture should be horizontally scalable. It must allow billions of participants to interact in real time at negligible costs. New multi-user software can be deployed, discovered, and accessed, completely free of censorship. As such, the Open Metaverse is much broader than video games and will maximize the freedom, creativity, and productivity of humanity on the Internet.
+The idea of the world computer is to create a single programmable medium where code and data live and operate correctly forever without centralized intermediaries, enabling trustless and censorship-resistant interaction at global scale. The world computer must operate on open decentralized networks. The network architecture should be horizontally scalable. It should allow billions of participants to interact in real time at negligible costs. New multi-user software can be deployed, discovered, and accessed, completely free of censorship. As such, the world computer will maximize the freedom, creativity, and productivity of humanity on the Internet.
 
 Blockchains laid the foundation for trust-minimized ownership and censorship-resistant multiplayer software on open decentralized networks. However, their reliance on Byzantine consensus mechanisms creates limitations in speed and costs. Operating under the strict serializability model, most modern blockchain networks require global coordination among their geo-distributed nodes to reach consistency. Yet, light only travels a few inches per clock cycle of a modern CPU. Relying on global coordination over the Internet makes the transaction throughput of blockchains heavily communication-bound. To tolerate Byzantine faults, most modern blockchains employ expensive Sybil countermeasures \cite{Tendermint,Casper}, creating price floors on transaction fees to pay node operators and limiting these systems to financial use cases.
 
 Various approaches to the blockchain scalability problem exist, yet none of them address the fundamental issue of coordination costs. One approach is to shard the network by applications \cite{Cosmos, RGB}. Another approach is to batch total-ordered blocks of transactions at rollups and submit their commitments and proofs on blockchains \cite{Rollup}. However, the transaction throughput of each shard or rollup remains heavily communication-bound.
 
-In this paper, we sketch out a solution that leverages the concurrency, composability, and local-first \cite{LoFi} properties of Conflict-free Replicated Data Types (CRDTs) \cite{CRDT}. We propose Distributed Real-time Programs (DRP), a protocol dedicated to enabling applications that are real-time multiplayer, sovereign, and running on open P2P networks. We introduce DRP Objects, a new abstraction for building censorship-resistant multiplayer applications at ease. We explore how DRP Objects can be applied to social graphs for social media applications, and multiplayer physics simulations with elastic collision constraints. We discuss various aspects that impact the flexibility, scalability and security of DRP Objects, including how they can produce verifiable compacted snapshots for interacting with blockchains. Nodes that implement DRP form an open ephemeral P2P network that keeps DRP Object states next to local compute on the edge, effectively forming a decentralized random access memory. Interoperating with open standards and protocols at other layers of the stack, DRP aims to grow into the de facto Internet protocol of the Open Metaverse.
+In this paper, we sketch out a solution that leverages the concurrency, composability, and local-first \cite{LoFi} properties of Conflict-free Replicated Data Types (CRDTs) \cite{CRDT}. We propose Distributed Real-time Programs (DRP), a protocol dedicated to enabling applications that are real-time multiplayer, sovereign, and running on open P2P networks. We introduce DRP Objects, a new abstraction for building censorship-resistant multiplayer applications at ease. We explore how DRP Objects can be applied to social graphs for social media applications, and multiplayer physics simulations with elastic collision constraints. We discuss various aspects that impact the flexibility, scalability and security of DRP Objects, including how they can produce verifiable compacted snapshots for interacting with blockchains. Nodes that implement DRP form an open ephemeral P2P network that keeps DRP Object states next to local compute on the edge, effectively forming a decentralized "random access memory". Interoperating with open standards and protocols at other layers of the stack, DRP aims to become a fundamental component of the world computer architecture.
 
 \section{Conflict-free Replicated Data Types}
 \label{sec:headings}
@@ -78,14 +77,14 @@ CRDTs are expressive. One approach is to make complex CRDTs from scratch. Althou
 \section{DRP Objects}
 \label{sec:headings}
 
-The primary abstraction of DRP is \textit{DRP Object}. DRP Objects are composable programmable objects that can be updated in real time concurrently and subscribed to as publish/subscribe (PubSub) groups on open P2P networks.
+The primary abstraction of DRP is \textit{DRP Object}. DRP Objects are composable programmable objects that can be (1) updated in real time concurrently, and (2) subscribed to as publish/subscribe (PubSub) groups on open P2P networks.
 
 Each DRP Object is an instance of a \textit{blueprint}. A blueprint has two main components:
 \begin{enumerate}
-    \item States: Each state is typed with either a built-in CRDT recognized by the protocol, or by another blueprint through class composition.
-    \item Functions: A function may read and \textit{monotonically mutate} (\textit{i.e.,} inflate) the states. All function signatures are specified in the blueprint's Application Binary Interface (ABI).
+    \item \textit{States}: States is typed with either a built-in type of the programming language in use, or another blueprint through class composition.
+    \item \textit{Functions}: A function may read and \textit{monotonically mutate} (\textit{i.e.,} inflate) the states. All function signatures are specified in the blueprint's Application Binary Interface (ABI).
 \end{enumerate}
-Additionally, a \textit{merge} function must be defined for merging the states of an external replica with the local states. This merge function must be commutative, associative, and idempotent for convergence purposes. Developers can create blueprints in their programming language of choice. These blueprints can then be compiled into suitable bytecode formats for execution by nodes implementing the protocol.
+Developers can create blueprints in their programming language of choice. These blueprints can then be compiled into suitable bytecode formats for execution by nodes implementing the protocol.
 
 \section{Causal ordering}
 \label{sec:headings}
@@ -156,7 +155,16 @@ To resolve this ambiguity, we can introduce the following concurrency semantics 
 \section{Signaling}
 \label{sec:headings}
 
-Having established how individual DRP Objects function, we now turn to how these objects interact with each other. DRP Objects interact by \textit{signaling}, a DRP Object-level term to differentiate from messaging at the network layer. A signal originates from an operation at the sender DRP Object. It then materializes into an operation at the receiver DRP Object. For causality to work, a signal needs to specify its causal dependencies in both the sender DRP Object and receiver DRP Object's hash graphs. This means the node that intends to send a signal needs to have the hash graphs of both the sender and receiver DRP Objects locally. This requirement creates challenges in scalability, as nodes must maintain and synchronize multiple hash graphs simultaneously. The transaction guarantees, security, and scalability of signaling remain an active area of research.
+Having established how individual DRP Objects function, we now turn to how these objects interact with each other. DRP Objects interact by \textit{signaling}, a DRP Object-level term to differentiate from messaging at the network layer.
+
+A signal:
+\begin{enumerate}
+    \item originates from an operation, at an honest node that generates it, in the \textit{sender} DRP Object;
+    \item materializes into an operation at an honest node in the \textit{receiver} DRP Object.
+\end{enumerate}
+The signaling mechanism provides the \textit{atomicity guarantee}: these two operations, across the sender and receiver objects, either get created together, or they don't get created at all.
+
+For causality to work, a signal needs to specify its causal dependencies in both the sender object and receiver object's hash graphs. This means the node that intends to send a signal needs to have the hash graphs of both objects locally. This requirement creates challenges in scalability, as nodes must maintain and synchronize multiple hash graphs simultaneously. The transaction guarantees, security, and scalability of this mechanism remain an active area of research.
 
 Figure 4 illustrates a signal diagrammatically, where the signal “glues” together its originating operation on the sender DRP Object side and the operation it materializes into on the receiver DRP Object side.
 
@@ -250,7 +258,7 @@ We can build a basic social graph on top of this DRP Object. Algorithm 2 shows t
 \State \Comment{(2) be added by a recognized user after the user was added}
 \State
 \State \textbf{function} $Merge\,(replica)$
-\State \hspace{\algorithmicindent} $Users \leftarrow Users \cup replica.Users$\Comment{union operator is defined for 2PSet} 
+\State \hspace{\algorithmicindent} $Users \leftarrow Users \cup replica.Users$\Comment{union operator is defined for 2PSet}
 \State \hspace{\algorithmicindent} $Posts \leftarrow Posts \cup replica.Posts$
 \end{algorithmic}
 \end{algorithm}
@@ -307,7 +315,7 @@ The second example is a multiplayer physics simulation that demonstrates the com
 
 We start by specifying two types of operations, \textit{Drive} and \textit{Tick}. Drive applies a change to the velocity vector of an object. Tick advances the time of an object, which causes its position to change by velocity times a constant time difference. Objects are driven and ticked only by the players that control them.
 
-Traversing a hash graph containing such operations, we can obtain for each player a sequence of operations they generated. To compute the position of a particular player, we traverse their sequence of operations, updating the velocity when we encounter a Drive operation, and updating the position by adding a displacement to it when we encounter a Tick operation. The displacement is equal to the product of the velocity and the constant time difference. 
+Traversing a hash graph containing such operations, we can obtain for each player a sequence of operations they generated. To compute the position of a particular player, we traverse their sequence of operations, updating the velocity when we encounter a Drive operation, and updating the position by adding a displacement to it when we encounter a Tick operation. The displacement is equal to the product of the velocity and the constant time difference.
 
 However, the above construction does not consider the elastic collision constraints. Geometrically, a collision between two objects occurs when their shapes overlap. Equation 1 expresses the no-overlap constraint for two circles $i$ and $j$, where $(x,y)$ refers to the center of a circle, and $r$ refers to its radius. Clearly, this is a numeric invariant that can be violated by concurrent positional changes of the circles. Equation 2 expresses the elastic collision constraint between two circles $i$ and $j$, where their relative velocites along the normal direction before and after the collision are $v^-_{rel}$ and $v^+_{rel}$ respectively, and $e$ is a scalar representing the restitution coefficient.
 
@@ -356,7 +364,7 @@ The life cycle of a DRP Object operation differs significantly from a blockchain
 
 A DRP Object snapshot is a single hash graph that represents an agreement among the DRP Object's replicas. It serves multiple purposes:
 \begin{enumerate}
-    \item It acts as a "state save" that may be worth persisted (\textit{e.g.}, on IPFS \cite{IPFS}).
+    \item It acts as a "state save" that may be worth persisted (\textit{e.g.}, on IPFS \cite{IPFS} or any public blockchain of choice).
     \item It can be used to generate irreversible transactions on blockchains.
 \end{enumerate}
 
@@ -420,11 +428,11 @@ A compelling perspective on DRP is its ability to power a decentralized network 
 \end{enumerate}
 \noindent
 
-Decentralized RAM has the potential to enable a new class of decentralized applications that can operate more dynamically and responsively than blockchain-based applications.
+Working with blockchains in concert, decentralized RAM has the potential to enable a new class of decentralized applications that can operate more dynamically and responsively than purely blockchain-based applications.
 
 \section{Conclusion}
 
-In this paper, we introduced DRP for P2P real-time multiplayer applications. CRDT is a natural choice for such use cases, and the use of hash graphs allows capturing causality among operations while tolerating Byzantine faults. DRP Object provides the programmability of common object systems and encapsulates coordination-free replication strategies. DRP specifies a set of interaction methods for DRP Objects to be created, updated, subscribed to, unsubscribed from, and synchronized. Their semantics correspond to behavior on the underlying P2P networks under the publish/subscribe model. Snapshot, compaction, access control, and threat models of DRP Objects were addressed. Nodes that implement DRP keep replicas of DRP Objects locally, facilitate persistence without being primarily responsible for it, and disseminate DRP Object updates only to nodes that are interested in them. As such, a P2P network comprised of such nodes effectively functions as a decentralized RAM.
+In this paper, we introduced DRP for P2P real-time multiplayer applications. CRDT is a natural choice for such use cases, and the use of hash graphs allows capturing causality among operations while tolerating Byzantine faults. DRP Object provides the programmability of common object systems and encapsulates coordination-free replication strategies. DRP specifies a set of interaction methods for DRP Objects to be created, updated, subscribed to, unsubscribed from, and synchronized. Their semantics correspond to behavior on the underlying P2P networks under the publish/subscribe model. Snapshot, compaction, access control, and threat models of DRP Objects were addressed. Nodes that implement DRP keep replicas of DRP Objects locally, facilitate persistence without being primarily responsible for it, and disseminate DRP Object updates only to nodes that are interested in them. As such, a P2P network comprised of such nodes effectively functions as a decentralized RAM. Combining this RAM-like structure with blockchains, we reimagine the architecture of the world computer.
 
 \section*{Acknowledgments}
 
@@ -448,8 +456,8 @@ The development of this work has been greatly enriched by the insights and suppo
 \end{itemize}
 
 %Bibliography
-\bibliographystyle{unsrt}  
-\bibliography{references}  
+\bibliographystyle{unsrt}
+\bibliography{references}
 
 %\lipsum[4] See Section \ref{sec:headings}.
 
@@ -489,9 +497,9 @@ The development of this work has been greatly enriched by the insights and suppo
 
 
 % \subsection{Figures}
-% \lipsum[10] 
+% \lipsum[10]
 % See Figure \ref{fig:fig1}. Here is how you add footnotes. \footnote{Sample of the first footnote.}
-% \lipsum[11] 
+% \lipsum[11]
 
 % \begin{figure}
 %   \centering
@@ -524,7 +532,7 @@ The development of this work has been greatly enriched by the insights and suppo
 % \subsection{Lists}
 % \begin{itemize}
 % \item Lorem ipsum dolor sit amet
-% \item consectetur adipiscing elit. 
+% \item consectetur adipiscing elit.
 % \item Aliquam dignissim blandit est, in dictum tortor gravida eget. In ac rutrum magna.
 % \end{itemize}
 
